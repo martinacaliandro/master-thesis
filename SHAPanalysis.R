@@ -564,10 +564,11 @@ write.csv(df_for_python, "dataset_clusters_for_skope.csv", row.names = FALSE) # 
 
 
 # 7) survival analysis -----
-df_sub$Cluster <- Cluster
+df_sub$Cluster <- Cluste
+df_sub$OS[df_sub$ID == "LM1001"] <- 24
 df_sub$event_death_24m <- 1 - df_sub$OS2ys_num
 df_sub$OS_24m <- pmin(df_sub$OS, 24)
-df_sub$OS[df_sub$ID == "LM1001"] <- 24
+
 
 os_stats <- aggregate(df_sub$OS, list(Cluster = Cluster), function(x) c(Median=median(x,na.rm=T), IQR_low=quantile(x,0.25,na.rm=T), IQR_high=quantile(x,0.75,na.rm=T), Mean=mean(x,na.rm=T), SD=sd(x,na.rm=T)))
 tab_os_res <- data.frame(Cluster = os_stats$Cluster, N = as.numeric(table(Cluster)), Eventi_24m = as.numeric(tapply(df_sub$event_death_24m, Cluster, sum)), OS2ys_Vivi = paste0(round(tapply(df_sub$OS2ys_num, Cluster, mean) * 100, 1), "%"), OS_Mediana_Mesi = sprintf("%.1f [%.1f - %.1f]", os_stats$x[, 1], os_stats$x[, 2], os_stats$x[, 3]), OS_Media_Mesi = sprintf("%.1f (±%.1f)", os_stats$x[, 4], os_stats$x[, 5]))
