@@ -432,19 +432,14 @@ for(i in seq_len(nrow(df_test))) {
   l <- df_test$LAA[i]
   p <- df_test$Volume_PTV[i]
   
-  if(a > 71.5 & l <= 0.908 & p <= 288.16) { cl_test_rules[i] <- 1 }
-  else if(a <= 72.5 & p <= 289.37) { cl_test_rules[i] <- 2 }
+  if(a <= 72.5 & p <= 289.37) { cl_test_rules[i] <- 1 }
+  else if(a > 71.5 & l <= 0.9465 & p <= 295.62) { cl_test_rules[i] <- 2 }
   else if(a <= 75.5 & l <= 1.511 & p > 289.86) { cl_test_rules[i] <- 3 }
-  else if(l > 1.511 & p > 289.59) { cl_test_rules[i] <- 4 }
-  else if(a > 75.5 & l <= 1.576 & p > 299.42) { cl_test_rules[i] <- 5 }
+  else if(a > 75.5 & l <= 1.767 & p > 295.62) { cl_test_rules[i] <- 4 }
+  else if(l > 1.511 & p > 289.59) { cl_test_rules[i] <- 5 }
 }
 
 test_results$Cluster_Rules <- cl_test_rules
-
-
-
-
-
 
 
 

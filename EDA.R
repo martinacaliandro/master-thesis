@@ -1297,6 +1297,83 @@ text(x = bp_kps,
 
 
 
+mean(data$Age, na.rm=TRUE); sd(data$Age, na.rm=TRUE)
+mean(data$Volume_PTV, na.rm=TRUE); sd(data$Volume_PTV, na.rm=TRUE)
+mean(data$BMI, na.rm=TRUE); sd(data$BMI, na.rm=TRUE)
+
+mean(data$eqd2_dose_radio, na.rm=TRUE); sd(data$eqd2_dose_radio, na.rm=TRUE)
+
+mean(data$mean_dose_aorta, na.rm=TRUE); sd(data$mean_dose_aorta, na.rm=TRUE)
+mean(data$eud_aorta, na.rm=TRUE); sd(data$eud_aorta, na.rm=TRUE)
+mean(data$mean_dose_lad, na.rm=TRUE); sd(data$mean_dose_lad, na.rm=TRUE)
+mean(data$eud_lad, na.rm=TRUE); sd(data$eud_lad, na.rm=TRUE)
+mean(data$mean_dose_pulm, na.rm=TRUE); sd(data$mean_dose_pulm, na.rm=TRUE)
+mean(data$eud_pulm, na.rm=TRUE); sd(data$eud_pulm, na.rm=TRUE)
+mean(data$mean_dose_atriumL, na.rm=TRUE); sd(data$mean_dose_atriumL, na.rm=TRUE)
+mean(data$eud_atriumL, na.rm=TRUE); sd(data$eud_atriumL, na.rm=TRUE)
+mean(data$mean_dose_atriumR, na.rm=TRUE); sd(data$mean_dose_atriumR, na.rm=TRUE)
+mean(data$eud_atriumR, na.rm=TRUE); sd(data$eud_atriumR, na.rm=TRUE)
+mean(data$mean_dose_ventricleL, na.rm=TRUE); sd(data$mean_dose_ventricleL, na.rm=TRUE)
+mean(data$eud_ventricleL, na.rm=TRUE); sd(data$eud_ventricleL, na.rm=TRUE)
+mean(data$mean_dose_ventricleR, na.rm=TRUE); sd(data$mean_dose_ventricleR, na.rm=TRUE)
+mean(data$eud_ventricleR, na.rm=TRUE); sd(data$eud_ventricleR, na.rm=TRUE)
+mean(data$mean_dose_Heart, na.rm=TRUE); sd(data$mean_dose_Heart, na.rm=TRUE)
+mean(data$eud_Heart, na.rm=TRUE); sd(data$eud_Heart, na.rm=TRUE)
+mean(data$mean_dose_venacava_I, na.rm=TRUE); sd(data$mean_dose_venacava_I, na.rm=TRUE)
+mean(data$eud_venacava_I, na.rm=TRUE); sd(data$eud_venacava_I, na.rm=TRUE)
+mean(data$mean_dose_venacava_S, na.rm=TRUE); sd(data$mean_dose_venacava_S, na.rm=TRUE)
+mean(data$eud_venacava_S, na.rm=TRUE); sd(data$eud_venacava_S, na.rm=TRUE)
+mean(data$mean_dose_lungs, na.rm=TRUE); sd(data$mean_dose_lungs, na.rm=TRUE)
+mean(data$eud_lungs, na.rm=TRUE); sd(data$eud_lungs, na.rm=TRUE)
+mean(data$EDIC, na.rm=TRUE); sd(data$EDIC, na.rm=TRUE)
+
+mean(data$Subcutaneous_Fat, na.rm=TRUE); sd(data$Subcutaneous_Fat, na.rm=TRUE)
+mean(data$Torso_Fat, na.rm=TRUE); sd(data$Torso_Fat, na.rm=TRUE)
+mean(data$Skeletal_Muscle, na.rm=TRUE); sd(data$Skeletal_Muscle, na.rm=TRUE)
+mean(data$Intermuscular_Fat, na.rm=TRUE); sd(data$Intermuscular_Fat, na.rm=TRUE)
+mean(data$LAA, na.rm=TRUE); sd(data$LAA, na.rm=TRUE)
+mean(data$diameter.aortic.arc.1..mm., na.rm=TRUE); sd(data$diameter.aortic.arc.1..mm., na.rm=TRUE)
+mean(data$diameter.aortic.arc.2..mm., na.rm=TRUE); sd(data$diameter.aortic.arc.2..mm., na.rm=TRUE)
+mean(data$diameter.kidney.sep..mm., na.rm=TRUE); sd(data$diameter.kidney.sep..mm., na.rm=TRUE)
+mean(data$heart_agatston, na.rm=TRUE); sd(data$heart_agatston, na.rm=TRUE)
+mean(data$heart_volume_mm3, na.rm=TRUE); sd(data$heart_volume_mm3, na.rm=TRUE)
+mean(data$aorta_agatston, na.rm=TRUE); sd(data$aorta_agatston, na.rm=TRUE)
+mean(data$aorta_volume_mm3, na.rm=TRUE); sd(data$aorta_volume_mm3, na.rm=TRUE)
+
+
+round(prop.table(table(data$Sex, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$riskfactors1, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$riskfactors2, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$Diabetes.drugs, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$Antilipidic.drugs, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$Hypertension, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$antithrombotic, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$Beta.Blockers, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$Diuretics, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$Smoking.status, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$KPS, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$Stage.at.RT, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$PDL.1.level, useNA="ifany")) * 100, 2)
+
+
+round(prop.table(table(data$Target.therapy, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$CHEMO, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$schedule_ok_chemo, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$cycles_chemo_sum, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$discontinued_chemo, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$IMMUNO, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$cycles_immuno, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$discontinued_immuno, useNA="ifany")) * 100, 2)
+
+round(prop.table(table(data$prescription_dose_radio, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$number_of_fractions_radio, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$discontinued_radio, useNA="ifany")) * 100, 2)
+
+round(prop.table(table(data$aortic_implant_present, useNA="ifany")) * 100, 2)
+round(prop.table(table(data$cardiac_implant_present, useNA="ifany")) * 100, 2)
+
+
+
 
 
 

@@ -655,6 +655,11 @@ evaluate_full_model <- function(model_type, subset_name, subset_info, data_df) {
   df_model <- data_df[, c(covs, "OS2ys_num", "hospital"), drop = FALSE]
   df_model <- df_model[complete.cases(df_model), ]
   
+  hosp_counts <- table(df_model$hospital)
+  valid_hospitals <- names(hosp_counts[hosp_counts >= 10])
+  df_model <- df_model[df_model$hospital %in% valid_hospitals, ]
+  df_model$hospital <- droplevels(factor(df_model$hospital))
+  
   X <- df_model[, covs, drop = FALSE]
   Y <- df_model$OS2ys_num
   Z <- df_model$hospital
@@ -664,6 +669,7 @@ evaluate_full_model <- function(model_type, subset_name, subset_info, data_df) {
   if (any(is_num)) {
     X_sc[, is_num] <- scale(X[, is_num])
   }
+  
   
   preds <- NULL
   model_obj <- NULL
@@ -887,18 +893,22 @@ analyze_me_trees <- function(subset_name, subset_info, data_df, base_model = "RF
   df_model <- data_df[, c(covs, "OS2ys_num", "hospital"), drop = FALSE]
   df_model <- df_model[complete.cases(df_model), ]
   
+  hosp_counts <- table(df_model$hospital)
+  valid_hospitals <- names(hosp_counts[hosp_counts >= 10])
+  df_model <- df_model[df_model$hospital %in% valid_hospitals, ]
+  df_model$hospital <- droplevels(factor(df_model$hospital))
+  
   X_full <- df_model[, covs, drop = FALSE]
   Y_full <- df_model$OS2ys_num
   Z_full <- df_model$hospital
   
-  cat("\n--- PUNTO 1: Distribuzione Pazienti per Ospedale ---\n")
+
   print(table(Z_full))
   
   cat(paste("\n--- Training", base_model, "e", mixed_model, "sul dataset completo... ---\n"))
   res_base <- evaluate_full_model(base_model, subset_name, subset_info, data_df)
   res_mixed <- evaluate_full_model(mixed_model, subset_name, subset_info, data_df)
   
-  cat("\n--- PUNTO 2: Intervalli di Confidenza Random Effects (estratti da", mixed_model, ") ---\n")
   glmer_obj <- res_mixed$fit$glmer
   if (!is.null(glmer_obj)) {
     p <- lattice::dotplot(ranef(glmer_obj, condVar = TRUE))
@@ -907,8 +917,7 @@ analyze_me_trees <- function(subset_name, subset_info, data_df, base_model = "RF
   } else {
     cat("Nessun random effect stimato (Varianza = 0 o modello non convergente).\n")
   }
-  
-  cat(paste("\n--- PUNTO 3: Shift delle Curve di Dipendenza (", base_model, "vs", mixed_model, ") ---\n"))
+
   valid_cont <- intersect(cont_vars, covs)
   if (length(valid_cont) > 0) {
     par(mfrow = c(2, length(valid_cont)))
@@ -925,8 +934,7 @@ analyze_me_trees <- function(subset_name, subset_info, data_df, base_model = "RF
     par(mfrow = c(1, 1))
   }
   
-  cat("\n--- PUNTO 4: Stabilità Random Effects in 5-Fold CV ---\n")
-  set.seed(120)
+  set.seed(123)
   folds <- caret::createFolds(as.factor(Y_full), k = 5, list = TRUE)
   is_num <- colnames(X_full) %in% cont_vars
   
@@ -973,7 +981,6 @@ analyze_me_trees <- function(subset_name, subset_info, data_df, base_model = "RF
   colnames(b_mat) <- paste0("Fold", 1:5)
   print(round(b_mat, 3))
   
-  cat("\n--- PUNTO 5: Test LOHO (Leave-One-Hospital-Out) ---\n")
   loho_base <- rep(NA_real_, length(Y_full))
   loho_mixed <- rep(NA_real_, length(Y_full))
   
@@ -1014,6 +1021,7 @@ analyze_me_trees <- function(subset_name, subset_info, data_df, base_model = "RF
   rownames(metrics_per_h) <- levels(factor(Z_full))
   print(round(metrics_per_h, 4))
 }
+
 
 subset_list <- list(
   
